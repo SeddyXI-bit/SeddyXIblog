@@ -1,0 +1,2 @@
+# SeddyXIblog
+blogs about SeddyXI
