@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeddyXI — XI BLVD</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ef;
+    --warm-grey: #9a9490;
+    --accent: #c8b89a;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: var(--sans); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 2.5rem; background: rgba(10,10,10,0.85); backdrop-filter: blur(10px); }
+  .nav-logo { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.15em; color: var(--white); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+  .hero-image { position: relative; overflow: hidden; }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(20%) contrast(1.1); }
+  .hero-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 60%, var(--black)); }
+  .hero-content { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem 3rem; }
+  .hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero-name { font-family: var(--serif); font-size: clamp(4rem, 7vw, 7rem); font-weight: 300; line-height: 0.9; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-tagline { font-size: 0.85rem; color: var(--warm-grey); max-width: 320px; line-height: 1.8; margin-bottom: 3rem; letter-spacing: 0.03em; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 1rem; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--white); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 0.3rem; transition: gap 0.2s; }
+  .hero-cta:hover { gap: 1.5rem; }
+  .star-divider { display: flex; align-items: center; gap: 1rem; margin: 5rem 0 3rem; }
+  .star-divider::before, .star-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+  .star { color: var(--accent); font-size: 1.2rem; }
+  section { padding: 7rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+  .section-title { font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 2.5rem; letter-spacing: -0.01em; }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .body-text { font-size: 0.95rem; color: var(--warm-grey); line-height: 1.9; max-width: 640px; }
+  .body-text + .body-text { margin-top: 1.5rem; }
+  .origin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .origin-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .origin-photos img { width: 100%; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(20%); }
+  .origin-photos img:first-child { grid-column: 1 / -1; aspect-ratio: 16/9; object-position: center 20%; }
+  .album-section { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 2px; padding: 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .album-logo { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+  .xi-mark { font-family: var(--serif); font-size: 10rem; font-weight: 300; line-height: 1; position: relative; color: var(--white); }
+  .xi-mark::after { content: '✦'; position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 1.5rem; color: var(--accent); }
+  .blvd-text { font-family: var(--sans); font-size: 1.4rem; letter-spacing: 0.8em; font-weight: 300; color: var(--white); }
+  .album-stat { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.82rem; }
+  .album-stat span:first-child { color: var(--warm-grey); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.7rem; }
+  .album-stat span:last-child { color: var(--white); }
+  .sound-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+  .sound-card { border: 1px solid rgba(255,255,255,0.08); padding: 2rem; }
+  .sound-card-num { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 1rem; }
+  .sound-card-title { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .sound-card p { font-size: 0.85rem; color: var(--warm-grey); line-height: 1.7; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 0.8rem; margin-top: 3rem; }
+  .gallery-grid img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%) contrast(1.05); transition: filter 0.3s; }
+  .gallery-grid img:hover { filter: grayscale(0%) contrast(1.1); }
+  .gallery-grid .featured { grid-column: 1 / 3; grid-row: 1 / 3; aspect-ratio: 1; }
+  .gallery-grid .small { aspect-ratio: 1; }
+  .connect-section { text-align: center; padding: 8rem 2.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .ig-link { display: inline-flex; align-items: center; gap: 0.8rem; margin-top: 2.5rem; padding: 1rem 2.5rem; border: 1px solid rgba(255,255,255,0.2); font-size: 0.75rem; letter-spacing: 0.25em; text-decoration: none; color: var(--white); transition: all 0.2s; }
+  .ig-link:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); }
+  footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+  footer .footer-logo { font-family: var(--serif); font-size: 1rem; letter-spacing: 0.1em; color: var(--warm-grey); }
+  footer .footer-copy { font-size: 0.65rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); text-transform: uppercase; }
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; grid-template-rows: 60vh auto; }
+    .hero-image::after { background: linear-gradient(to top, var(--black) 20%, transparent); }
+    .hero-content { padding: 2.5rem 1.5rem 4rem; }
+    .origin-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .album-section { grid-template-columns: 1fr; padding: 3rem 2rem; gap: 3rem; }
+    .sound-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid .featured { grid-column: 1 / -1; grid-row: auto; }
+    section { padding: 4rem 1.5rem; }
+  }
+
+  .listen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+    padding: 0.9rem 2rem;
+    background: var(--accent);
+    color: var(--black);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    width: fit-content;
+    transition: opacity 0.2s;
+  }
+  .listen-btn:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">SeddyXI</a>
+  <ul class="nav-links">
+    <li><a href="#origin">Origin</a></li>
+    <li><a href="#album">XI BLVD</a></li>
+    <li><a href="#sound">Sound</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-image">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABAAAAAQACAIAAADwf7zUAADlxGNhQlgAAOXEanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAANzhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjFh" alt="">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">ARTIST & PRODUCER</div>
+    <h1 class="hero-name">Seddy<em>XI</em></h1>
+    <p class="hero-tagline">Crafting immersive sonic experiences through innovative production and authentic storytelling.</p>
+    <a href="#album" class="hero-cta">Explore XI BLVD →</a>
+  </div>
+</div>
+
+<section id="origin">
+  <div class="star-divider">
+    <span class="star">✦</span>
+  </div>
+  <h2 class="section-title">The <em>Origin</em> Story</h2>
+  <p class="body-text">SeddyXI emerged from the vibrant streets of XI BLVD, where creativity flows like an underground river. Each track tells a story of passion, innovation, and artistic rebellion.</p>
+  <p class="body-text">With roots in electronic production and a heart for storytelling, every beat is a conversation between technology and emotion.</p>
+  <div class="origin-grid">
+    <div>
+      <div class="origin-photos">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="">
+      </div>
+    </div>
+    <div></div>
+  </div>
+</section>
+
+<section id="album">
+  <div class="album-section">
+    <div class="album-logo">
+      <div class="xi-mark">XI</div>
+      <div class="blvd-text">BLVD</div>
+    </div>
+    <div>
+      <div class="section-label">Latest Release</div>
+      <h3 class="section-title">XI <em>BLVD</em></h3>
+      <div class="album-stat">
+        <span>Release Date</span>
+        <span>2024</span>
+      </div>
+      <div class="album-stat">
+        <span>Format</span>
+        <span>Digital Album</span>
+      </div>
+      <div class="album-stat">
+        <span>Tracks</span>
+        <span>10</span>
+      </div>
+      <div class="album-stat">
+        <span>Genre</span>
+        <span>Electronic / Ambient</span>
+      </div>
+      <p class="body-text" style="margin-top: 2rem;">A sonically rich journey through urban landscapes and introspective moments. XI BLVD represents the evolution of SeddyXI's artistic vision.</p>
+      <a href="#" class="listen-btn">Listen Now →</a>
+    </div>
+  </div>
+</section>
+
+<section id="sound">
+  <div class="star-divider">
+    <span class="star">✦</span>
+  </div>
+  <h2 class="section-title">The <em>Sound</em></h2>
+  <p class="body-text">SeddyXI's sonic palette blends electronic production with organic instrumentation, creating a unique signature sound.</p>
+  <div class="sound-grid">
+    <div class="sound-card">
+      <div class="sound-card-num">01</div>
+      <div class="sound-card-title">Atmospheric</div>
+      <p>Layered soundscapes that envelop and transport the listener to otherworldly spaces.</p>
+    </div>
+    <div class="sound-card">
+      <div class="sound-card-num">02</div>
+      <div class="sound-card-title">Rhythmic</div>
+      <p>Intricate grooves and percussion that drive the narrative forward with precision.</p>
+    </div>
+    <div class="sound-card">
+      <div class="sound-card-num">03</div>
+      <div class="sound-card-title">Narrative</div>
+      <p>Each composition tells a story, weaving technical mastery with emotional depth.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="gallery-grid">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" class="featured" alt="">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" class="small" alt="">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" class="small" alt="">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" class="small" alt="">
+  </div>
+</section>
+
+<section id="connect" class="connect-section">
+  <div class="star-divider">
+    <span class="star">✦</span>
+  </div>
+  <h2 class="section-title">Connect &amp; <em>Follow</em></h2>
+  <p class="body-text">Stay updated with new releases and behind-the-scenes content.</p>
+  <a href="https://instagram.com/seddyxi" class="ig-link" target="_blank">Follow on Instagram →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">SeddyXI</div>
+  <div class="footer-copy">© 2024 XI Studios. All Rights Reserved.</div>
+</footer>
+
+</body>
+</html>
